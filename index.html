@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future-Tech Portfolio | Video, AI & Robotics</title>
+    <style>
+        /* --- CSS VARIABLES & THEME --- */
+        :root {
+            --bg-dark: #0a0b10;
+            --accent-cyan: #00f2ff;
+            --accent-purple: #7000ff;
+            --text-gray: #b0b0b0;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND ANIMATION --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0a0b10 100%);
+            z-index: -2;
+        }
+
+        /* --- LAYOUT UTILS --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1920') no-repeat center center/cover;
+            background-blend-mode: overlay;
+            background-color: rgba(0,0,0,0.7);
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            letter-spacing: 10px;
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--accent-cyan); }
+            to { text-shadow: 0 0 20px var(--accent-purple), 0 0 30px var(--accent-cyan); }
+        }
+
+        /* --- SKILLS & KNOWLEDGE (GRAPHS) --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: var(--glass);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(10px);
+        }
+
+        .bar-container {
+            background: #222;
+            height: 10px;
+            border-radius: 5px;
+            margin: 15px 0 25px 0;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+
+        /* --- SERVICES --- */
+        .services-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .service-box {
+            flex: 1 1 300px;
+            padding: 40px;
+            background: linear-gradient(145deg, #161b22, #0d1117);
+            border: 1px solid var(--accent-purple);
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .service-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px var(--accent-cyan);
+        }
+
+        /* --- SHOWCASE (VIDEO & ROBOTICS) --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(112, 0, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+        .portfolio-item:hover img { transform: scale(1.1); }
+
+        /* --- FUTURE PROJECTS --- */
+        .future-timeline {
+            border-left: 2px solid var(--accent-cyan);
+            margin-left: 20px;
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -41px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--bg-dark);
+            border: 2px solid var(--accent-purple);
+            border-radius: 50%;
+        }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(10, 11, 16, 0.9);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--accent-cyan); }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#hero">Start</a></li>
+            <li><a href="#skills">Knowledge</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Showcase</a></li>
+            <li><a href="#future">Future Lab</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1>NEON GENESIS</h1>
+            <p>Video Creation | Artificial Intelligence | Robotics for Daily Life</p>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <h2>Technical Knowledge</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Robotics (Arduino/ROS)</h3>
+                <p>Developing kid-friendly robotics kits.</p>
+                <div class="bar-container"><div class="bar-fill" style="width: 90%;"></div></div>
+                
+                <h3>AI & Neural Networks</h3>
+                <p>Implementation of LLMs and Computer Vision.</p>
+                <div class="bar-container"><div class="bar-fill" style="width: 85%;"></div></div>
+            </div>
+            <div class="skill-card">
+                <h3>Cinematic Video Creation</h3>
+                <p>High-end editing and AI-assisted workflows.</p>
+                <div class="bar-container"><div class="bar-fill" style="width: 95%;"></div></div>
+                
+                <h3>Future Tech Design</h3>
+                <p>UI/UX for futuristic interfaces.</p>
+                <div class="bar-container"><div class="bar-fill" style="width: 80%;"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="container">
+        <h2>Specialized Services</h2>
+        <div class="services-flex">
+            <div class="service-box">
+                <h3>AI Video Production</h3>
+                <p>Using AI to generate assets, upscale footage, and automate complex editing tasks.</p>
+            </div>
+            <div class="service-box">
+                <h3>Educational Robotics</h3>
+                <p>Curating robotics workshops and building safe, interactive toys for the next generation.</p>
+            </div>
+            <div class="service-box">
+                <h3>Smart Daily Automation</h3>
+                <p>Consulting on integrating AI into home and office life for maximum efficiency.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="container">
+        <h2>Project Showcase</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=800" alt="Robot Hand">
+                <div class="portfolio-overlay">
+                    <h3>Project: Bionic Kid-Hand</h3>
+                    <p>3D Printed Robotics</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" alt="AI Art">
+                <div class="portfolio-overlay">
+                    <h3>AI Short Film</h3>
+                    <p>100% AI-Generated Assets</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" alt="Cyber Security">
+                <div class="portfolio-overlay">
+                    <h3>Daily Use Bot</h3>
+                    <p>Automated Personal Assistant</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="future" class="container">
+        <h2>Future Lab Roadmap</h2>
+        <div class="future-timeline">
+            <div class="timeline-item">
+                <h3>Q3 2024: The AI Nanny</h3>
+                <p>A robotic assistant specifically designed to help kids with homework using natural language.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Q1 2025: Fully Autonomous Vlogs</h3>
+                <p>Cameras that use AI to frame, follow, and live-edit content without human input.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 50px; color: var(--text-gray);">
+        <p>&copy; 2024 Your Name | Built with Pure HTML & CSS</p>
+    </footer>
+
+</body>
+</html>
